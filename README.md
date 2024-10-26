@@ -48,32 +48,41 @@ To prevent further changes by `systemd-resolved`:
 ### 2. Disable `systemd-resolved`
 
 1. Stop the service:
+   
     `sudo systemctl stop systemd-resolved`
 
-2. Disable it from starting on boot:
+3. Disable it from starting on boot:
+   
     `sudo systemctl disable systemd-resolved`
 
 ### 3. Update `/etc/hosts`
 
 1. Open the hosts file:
+   
 	`sudo nano /etc/hosts`
 
-2. Comment out or remove any lines that direct `get.code-industry.net` to `127.0.0.1` or `0.0.0.0`:
+3. Comment out or remove any lines that direct `get.code-industry.net` to `127.0.0.1` or `0.0.0.0`:
+   
 	`# 0.0.0.0 get.code-industry.net`
 
 ### 4. Install or Update CA Certificates
 
 1. For Arch Linux systems, ensure you have the `ca-certificates-utils` package installed and/or updated:
+   
 	`sudo pacman -S ca-certificates-utils`
 
-2. To update the certificate store, run:
+3. To update the certificate store, run:
+   
 	`sudo trust extract-compat`
 
 ### 5. Test DNS and Server Connection
 
 1. Verify DNS resolution:
+   
 	`nslookup get.code-industry.net`
+
 * Output:
+  
 ```
 Server:         1.1.1.1
 Address:        1.1.1.1#53
@@ -84,8 +93,11 @@ Address: 176.99.6.191
 ```
 
 2. Verify Ping:
+   
 	`ping get.code-industry.net -c 5`
+
 * Output:
+  
 ```
 PING get.code-industry.net (127.0.0.1) 56(84) bytes of data.
 64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.032 ms
@@ -96,8 +108,11 @@ PING get.code-industry.net (127.0.0.1) 56(84) bytes of data.
 ```
 
 3. Test `curl` with the correct URL:
+   
 	`curl -I http://get.code-industry.net`
+
 * Output:
+  
 ```
 HTTP/1.1 403 Forbidden
 Server: nginx/1.18.0 (Ubuntu)
@@ -106,8 +121,11 @@ Content-Type: text/html
 Connection: keep-alive
 ```
 4. If encountering SSL issues, use:
+   
 	`curl -Ik https://get.code-industry.net`
+
 * Output:
+  
 ```
 HTTP/1.1 403 Forbidden
 Server: nginx/1.18.0 (Ubuntu)
