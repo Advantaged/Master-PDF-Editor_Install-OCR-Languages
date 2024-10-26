@@ -40,7 +40,9 @@ options edns0 trust-ad
 		when DNS responses are verified as authentic (particularly relevant with DNSSEC).
 
 3. Set `/etc/resolv.conf` to Immutable
+ 
 To prevent further changes by `systemd-resolved`:
+
     `sudo chattr +i /etc/resolv.conf`
 
 ### 2. Disable `systemd-resolved`
